@@ -199,26 +199,118 @@ owns(john, book(sherlock_holems, arthur))
 ?- owns(john, book(_, author(_, bronte)) % _ are different
 ```
 
-#### Characters
+##### Characters
 - Character is an item of data in its own right.
 - printing and non-printing characters in Prolog
 - non-printing characters - blank space, new line (enter)
 
-#### Operators
+##### Operators
+- Normal way: x + y * z
+- How understand: +(x, *(y,z))
+- () * / + -
 
+##### Equality and Unification
+- mostly = for numbers
+- = is unification: trying to make X and Y equal. 
+```
+X = Y % unify X with Y
+```
+- If X is an uninstantiated variable, and if Y is instantiated to any term, then X and Y are equal.
+- X will become instantiated to whatever Y is.
+```
+% X is uninstantiated element and Y is
+% X = Y
+% X will become instantiated to whatever Y is.
+% X to be instantiated to the structure rides
+rides(student, bicycle) = X
 
+% Two structures are equal if they have the same functor and number of components,
+% and all corresponding components are equal.
+rides(student, bicycle) = rides(student, X)
+```
+- **Corefer**: If two variables share, then whenever one of them becomes instantiated to some term, the other one automatically is instantiated to the same term.
 
+```
+sum_of_two(N1, N2, Sum) :- Sum = N1 + N2.
+```
 
+##### Arithmetic
+###### Arithmetic Operators
+- X + Y
+- X - Y
+- X * Y
+- X / Y
+- X // Y % integer division
+- X mod Y % remainder of X divided by Y
+  
+###### Logical Operators
+- X =:= Y (true if X == Y)
+- X =\= Y (true if X != Y)
+- X < Y
+- X > Y
+- X =< Y
+- X >= Y
+  
+```
+/*
+Example:
+X was a prince during year Y if :
+  X reigned between years A and B, and
+  Y is between A and B, inclusive. */
+prince(X, Y) :-
+  reigns(X, A, B),
+  Y >= A,
+  Y =< B.
+```
 
+```
+even_or_not(Num, Result) :-
+    0 is Num mod 2,
+    Result is even.
 
+even_or_not(Num, Result) :-
+    1 is Num mod 2,
+    Result is odd.
+```
 
+```
+even_or_not(Num, even) :-
+    0 is Num mod 2.
 
+even_or_not(Num, odd) :-
+    1 is Num mod 2.
+```
 
+```
+even_or_not(Num, Result) :-
+    0 is Num mod 2 -> Result is even;
+    Result is odd.
+```
 
+##### Summary of Satisfying Goals
 
+- Prolog backtrack
+- Forward Chaining: Start with existing facts and clauses and work forward, trying to derive the goal.
+- - If the number of facts is not very small and the number of rules is not large, backward chaining will be faster
+- Backward Chaining: Start with the goal and work backwards, attempting to decompose it into set of true clauses.
+- - Prolog uses Backward Chaining.
+<br>
+- Two search
+- - DFS: Find a complete sequence of propositions for the first subgoal before working on the others (what Prolog uses)
+  - BFS: Works on all subgoals in parallel.
+- Prolog uses DFS. DFS uses stack.
+- Please see at Figure 2.1-6
+```
+% is mary sister of john
+female(mary), parent(mary, M, F), parent(john, M, F).
 
+% to be a sister mary has to be a female % subgoal 1
+% find who are Mother M and Father F of mary % subgoal 2
+% find who are Mother M and Father F of john and are the unify (equal ?) % subgoal 3
+% if one subgoal fail go back to the previous one (Fig 2.1-6)
+```
 
-
+#### Chapter 3: Using Data Structures
 
 
 
