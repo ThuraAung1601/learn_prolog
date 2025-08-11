@@ -130,7 +130,84 @@ may_steal(P, T) :-
 - Please see Lab. (1) for practice.
 
 ### Chapter 2: Closer Look
+
+#### Syntax
+- Prolog programs are built from **terms**.
+- **Term** is a
+- - Constant: specific objects or specific relationships. (1) atoms (2) numbers.
+  - Variable: objects we are unable or unwilling to name at the time we write the program. starts with Capital letter or "_".
+  - Structure: single object consisting of a collection of other objects
+- Each term is a sequence of characters. (A-Z, a-z, 0-9, +-*/\~^<>:.?@#$&)
+
+##### Constants 
+- Constant: specific objects or specific relationships.
+- Two types of constants => (1) atoms (2) numbers.
+- Atoms
+- - names (john, mary, book)
+  - special symbols (:-, ?-)
+  - Any character can be in "''" and atom.
+  - 'george-smith' ATOM
+  - geroge-smith NOT ATOM
+  - 234george NOT ATOM
+  - Void NOT ATOM (because Void starts with Capital letter)
+  - _alpha NOT ATOM (starts with _ means annonymouse variable)
+
+##### Variables 
+- Variable: objects we are unable or unwilling to name at the time we write the program. starts with Capital letter or "_".
+```
+% who likes who
+likes(X, Y).
+% output will be
+% X = mary, Y = john;
+% X = mary, Y = coffee; ....
+
+% someone likes john and we don't care someone
+% we just want to check whether someone likes john or not
+likes(_, john).
+
+% does mary like anyone
+likes(mary, _).
+
+% if two _ in a rule or fact, those two _ are not the same.
+likes(X, X). % X and X are the same.
+likes(_, _). % _ and _ are not the same.
+```
+
+##### Structures
+- Structures: compound terms
+- Structures: single object consisting of a collection of other objects
+- Consists two parts - (1) functor and (2) component
+- - functor is the predicate and
+  - components are the arguments
+```
+book(wuthering_heights, bronte)
+% book is predicate ===> is a functor in structure context
+% wuthering_heights and bronte are arguments ====> is components in structure context
+```
   
+```
+% john own the book
+owns(john, book)
+% what books
+owns(john, book(wuthering_heights, bronte))
+owns(john, book(sherlock_holems, arthur))
+
+% question
+% I want to know does john own any book written by bronte sisters
+?- owns(john, book(X, author(Y, bronte))
+% we don't need to care book name X and fist name Y so
+?- owns(john, book(_, author(_, bronte)) % _ are different
+```
+
+#### Characters
+- Character is an item of data in its own right.
+- printing and non-printing characters in Prolog
+- non-printing characters - blank space, new line (enter)
+
+#### Operators
+
+
+
 
 
 
