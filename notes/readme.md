@@ -199,17 +199,17 @@ owns(john, book(sherlock_holems, arthur))
 ?- owns(john, book(_, author(_, bronte)) % _ are different
 ```
 
-##### Characters
+#### Characters
 - Character is an item of data in its own right.
 - printing and non-printing characters in Prolog
 - non-printing characters - blank space, new line (enter)
 
-##### Operators
+#### Operators
 - Normal way: x + y * z
 - How understand: +(x, *(y,z))
 - () * / + -
 
-##### Equality and Unification
+#### Equality and Unification
 - mostly = for numbers
 - = is unification: trying to make X and Y equal. 
 ```
@@ -234,7 +234,7 @@ rides(student, bicycle) = rides(student, X)
 sum_of_two(N1, N2, Sum) :- Sum = N1 + N2.
 ```
 
-##### Arithmetic
+#### Arithmetic
 ###### Arithmetic Operators
 - X + Y
 - X - Y
@@ -300,6 +300,7 @@ even_or_not(Num, Result) :-
   - BFS: Works on all subgoals in parallel.
 - Prolog uses DFS. DFS uses stack.
 - Please see at Figure 2.1-6
+
 ```
 % is mary sister of john
 female(mary), parent(mary, M, F), parent(john, M, F).
@@ -310,9 +311,58 @@ female(mary), parent(mary, M, F), parent(john, M, F).
 % if one subgoal fail go back to the previous one (Fig 2.1-6)
 ```
 
-#### Chapter 3: Using Data Structures
+### Chapter 3: Using Data Structures
+Recursion: Backward movement, return.
 
+#### Structures and Trees
+- Each functor is a node and components are brances.
 
+```
+>> parents(charles, elizabeth, phillip).
+  parent - phillip
+    |   \
+charles   elizabeth
+```
 
+#### Lists
+- List: ordered sequence of elements
+- Ordered means that the order of the elements in the sequence matters.
+- Elements may be any terms - constant, variable, and structures.
+- List can be expressed as special kind of tree. (Page 50)
 
+```
+.(a, [])
+a is head, [] is tail
+. - []
+|
+a
+```
+
+```
+[a, V1, b, [X, Y]
+. - . - . - . - []
+|   |   |   |
+a   V1  b   . - . - []
+            |   |
+            X   Y
+```
+- List are manipulated by splitting them up into a head and a tail.
+- Please see Table 3.1
+```
+% Pair: [Head | Tail]
+% List: [] or [Head | TailIsAList]
+
+pairparts([H|T], H, T). % pair or not
+
+>> pairparts([1, 2], X, Y). % X = 1, Y = 2.
+>> pairparts([1, 2, 3], X, Y). % X = 1, Y = [2, 3].
+>> pairparts(X, a, b). % X = [a|b].
+```
+
+```
+first/2 - find the first thing in a list
+first([H|T], H).
+
+>> first([1, 2, 3], X). % X = 1.
+```
 
