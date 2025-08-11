@@ -354,7 +354,7 @@ a   V1  b   . - . - []
 
 pairparts([H|T], H, T). % pair or not
 
->> pairparts([1, 2], X, Y). % X = 1, Y = 2.
+>> pairparts([1, 2], X, Y). % X = 1, Y = [2].
 >> pairparts([1, 2, 3], X, Y). % X = 1, Y = [2, 3].
 >> pairparts(X, a, b). % X = [a|b].
 ```
@@ -364,5 +364,32 @@ first/2 - find the first thing in a list
 first([H|T], H).
 
 >> first([1, 2, 3], X). % X = 1.
+>> first([[1, 2], [2, 3]], X). % X = [1, 2].
+```
+
+```
+% check is that the list
+% base_case is input is []
+islist([]).
+% if not a list we will not have tail
+% take tail of input list at every recurrence to the end 
+% end of every list is []
+islist([_H|T]) :- islist(T).
+
+% check there are at least two element in a list
+at_least_two_in_list([_, _ |_T]).
+
+% give me the first two element
+at_least_two_in_list([H1, H2|_T], X, Y) :- X = H1, Y = H2.
+% at_least_two_in_list([H1, H2|_T], H1, H2).
+
+% third element in the list
+third_element_in_list([_, _, H|_T], H).
+
+% first/3 first two elements in the list
+first_two_element([E1, E2|_T], E1, E2).
+
+% first/2 
+first_two_element([E1, E2|_T], [E1, E2]).
 ```
 
