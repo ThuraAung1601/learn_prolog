@@ -427,7 +427,8 @@ factorial(N, Fac) :-
 
 #### Recursion Patterns
 <ol>
-  <li>**List Manipulation**</li>: Doing on the single list.
-  <li>**Searching**</li>: Searching in the list.
-  <li>**Slicing**</li>: Slicing the list till X.
+  <li>List Manipulation</li>: Doing on the single list.
+  <li>Searching</li>: Searching in the list.
+  <li>Slicing</li>: Slicing the list till X.
 </ol>
+
