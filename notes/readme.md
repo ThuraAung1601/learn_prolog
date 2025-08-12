@@ -210,7 +210,7 @@ owns(john, book(sherlock_holems, arthur))
 - () * / + -
 
 #### Equality and Unification
-- mostly = for numbers
+- mostly use "is" for numbers (e.g R is 5 + 1.)
 - = is unification: trying to make X and Y equal. 
 ```
 X = Y % unify X with Y
@@ -393,3 +393,41 @@ first_two_element([E1, E2|_T], E1, E2).
 first_two_element([E1, E2|_T], [E1, E2]).
 ```
 
+- Recursion in Prolog
+- Basecase
+- Recursive case
+
+```
+# factorial.py
+def factorial(num):
+  if num <= 1:
+    return 1
+  return factorial(num-1) * n
+```
+
+```
+% factorial.pl
+factorial(N, Fac) :-
+  N =< 1 -> Fac is 1;
+  N1 is N - 1,
+  factorial(N1, F1),
+  Fac is F1 * N.
+```
+
+```
+% factorial.pl
+factorial(0, 1).
+factorial(1, 1).
+factorial(N, Fac) :-
+  N > 1,
+  N1 is N - 1,
+  factorial(N1, Fac1), % here Fac1 is factorial(num-1) AND n is N
+  Fac is Fac1 * N.
+```
+
+#### Recursion Patterns
+<ol>
+  <li>**List Manipulation**</li>: Doing on the single list.
+  <li>**Searching**</li>: Searching in the list.
+  <li>**Slicing**</li>: Slicing the list till X.
+</ol>
