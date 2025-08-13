@@ -7,6 +7,14 @@ first([H|_T], H).
 
 ispair([_H|_T]).
 
+/*
+?- ispair([1]).
+true.
+
+?- ispair([]).
+false.
+*/
+
 % check is that the list
 % base_case is input is []
 islist([]).
@@ -30,3 +38,7 @@ first_two_element([E1, E2|_T], E1, E2).
 
 % first/2 
 first_two_element([E1, E2|_T], [E1, E2]).
+
+% first_two_element2/3
+% first_two_element(List, X, Y).
+first_two_element2([H1, H2|_], H1, H2).

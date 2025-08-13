@@ -62,8 +62,8 @@ nextto([_|T], X, Y) :- nextto(T, X, Y).
 % sumlist/2 - sum of elements of a list
 sumlist([], 0).
 sumlist([H|T], Sum) :-
-  Sum is H + SumT,
-  sumlist(T, SumT).
+  sumlist(T, SumT),
+  Sum is H + SumT.
 
 % sumfirst_x/3 - sum the first three elements
 % sumfirst_x(List, X, Sum)

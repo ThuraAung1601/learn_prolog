@@ -45,6 +45,11 @@ grandmother(X, Y) :-
 grandparent(X, Y) :-
     grandfather(X, Y); grandmother(X, Y).
 
+grandparent(X, Y) :-
+    grandfather(X, Y).
+grandparent(X, Y) :-
+    grandmother(X, Y).
+
 sibling(X, Y) :-
     parent(Z, X), parent(Z, Y), X \= Y.
 
