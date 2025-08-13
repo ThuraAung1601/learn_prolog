@@ -268,11 +268,11 @@ prince(X, Y) :-
 ```
 even_or_not(Num, Result) :-
     0 is Num mod 2,
-    Result is even.
+    Result = even. % cannot use is because even is not a number.
 
 even_or_not(Num, Result) :-
     1 is Num mod 2,
-    Result is odd.
+    Result = odd.
 ```
 
 ```
@@ -433,6 +433,7 @@ factorial(N, Fac) :-
   <li>Searching</li>: Searching in the list.
   <li>Slicing</li>: Slicing the list till X.
 </ol>
+
 
 
 
