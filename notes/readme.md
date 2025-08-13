@@ -244,13 +244,15 @@ sum_of_two(N1, N2, Sum) :- Sum = N1 + N2.
 - X mod Y % remainder of X divided by Y
   
 ###### Logical Operators
+```
 - X =:= Y (true if X == Y)
 - X =\= Y (true if X != Y)
 - X < Y
 - X > Y
 - X =< Y
 - X >= Y
-  
+```
+
 ```
 /*
 Example:
@@ -431,5 +433,6 @@ factorial(N, Fac) :-
   <li>Searching</li>: Searching in the list.
   <li>Slicing</li>: Slicing the list till X.
 </ol>
+
 
 
