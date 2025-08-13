@@ -207,7 +207,7 @@ owns(john, book(sherlock_holems, arthur))
 #### Operators
 - Normal way: x + y * z
 - How understand: +(x, *(y,z))
-- () * / + -
+- () ^ * / + -
 
 #### Equality and Unification
 - mostly use "is" for numbers (e.g R is 5 + 1.)
@@ -431,4 +431,5 @@ factorial(N, Fac) :-
   <li>Searching</li>: Searching in the list.
   <li>Slicing</li>: Slicing the list till X.
 </ol>
+
 
