@@ -44,3 +44,8 @@ prefix2infix([H1, H2|T], [H2L, H1|L]) :-
 prefix2infix([H1|T], [H1|L]) :-
     number(H1),
     prefix2infix(T, L).
+prefix2infix([H1|T], [H1L|L]) :-
+    \+ number(H1),
+    is_expression(H1),
+    prefix2infix(H1, H1L),
+    prefix2infix(T, L).
