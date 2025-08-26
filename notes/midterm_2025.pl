@@ -3,7 +3,9 @@ likes(john, ai).
 likes(tom, ipad).
 likes(tom, prolog).
 likes(mary, ai).
-is_friend_of(X, Y) :- likes(X, Z), likes(Y, Z).
+is_friend_of(X, Y) :-
+    likes(X, Z),
+    likes(Y, Z).
 /* 
     ?- is_friend_of(A, B).
     A = B, B = john ;
