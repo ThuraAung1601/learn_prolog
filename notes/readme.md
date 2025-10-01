@@ -435,5 +435,92 @@ factorial(N, Fac) :-
 </ol>
 
 
+### Chapter 4: Backtracking and the "Cut"
+
+unifying fact (or rule head) 
+- ==> goal has been matched 
+- ==> instantiate any previously uninstantiated variables that have been unified
+- ==> satisfy subgoals introducded by the rule
+
+No unifying fact (or rule head)
+- ==> goal has not passed
+- ==> re-satisfy the goal 
+- ==> If original goal appears, then this will be goal on its left
+
+```
+likes(john, ai).
+likes(tom, ipad).
+likes(tom, prolog).
+likes(mary, ai).
+is_friend_of(X, Y) :-
+    likes(X, Z),
+    likes(Y, Z).
+```
+
+```
+ ?- is_friend_of(A, B).
+    A = B, B = john ;
+    A = john,
+    B = mary ;
+    A = B, B = tom ;
+    A = B, B = tom ;
+    A = mary,
+    B = john ;
+    A = B, B = mary.
+```
+
+```
+boy(george).
+boy(kim).
+boy(sheldon).
+
+girl(hlahla).
+girl(winwin).
+girl(myamya).
+
+possible_pair(X, Y) :- boy(X), girl(Y).
+```
+
+- satisfy goal boy(X) finding george 
+- satisfy goal girl(Y) finding hlahla
+- if we ask more -> ;
+- backtrack and re-satisfy what did the last - girl
+
+#### Cut
+- Cut (!) tells which previous choices it need not consider again when it backtracks through the chain of satisfied goals.
+- Cut benefits
+- - Operate faster
+- - Less memory space
+
+```
+connect(b, a).
+connect(b, d).
+connect(d, c).
+path(A, B) :- connect(A, B).
+path(A, B) :- path(A, C), connect(C, B), !.
+```
 
 
+```
+facility(Pers, Fac) :-
+  book_overdue(Pers, Book), 
+  !,
+  basic_facility(Fac).
+facility(Pers, Fac) :- general_facility(Fac).
+
+basic_facility(references).
+basic_facility(enquiries).
+
+additional_facility(borrowing).
+additional_facility(inter_library_loan).
+
+general_facility(X) :- basic_facility(X).
+general_facility(X) :- additional_facility(X).
+```
+
+Please see figure 4.4 and 4.5.
+
+#### Common uses of Cut
+- Confirming the rule choice
+- Cut-fail combination = NOT (\+)
+- Terminating a "generate and test" => problem with many solution OR many goals (e.g. Tic-Tac-Toe)
