@@ -523,4 +523,4 @@ Please see figure 4.4 and 4.5.
 #### Common uses of Cut
 - Confirming the rule choice
 - Cut-fail combination = NOT (\+)
-- Terminating a "generate and test" => problem with many solution OR many goals (e.g. Tic-Tac-Toe)
+- Terminating a "generate and test" => problem with many solution OR many goals (e.g.)
