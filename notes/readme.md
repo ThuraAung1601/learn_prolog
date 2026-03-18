@@ -580,4 +580,83 @@ likes(sally, X) :- fruit(X), negation(yellow(X))
 
 ### Chapter 6: Meta-programming
 - Prolog code to run prolog code
-- 
+
+```
+solve(true).
+solve((A, B)) :- 
+    solve(A), solve(B), !.
+solve(A) :- clause(A, Body), solve(Body), !.
+
+builtin(A) :-
+    predicate_property(A, built_in).
+
+solve(true, 0).
+solve((A, B), Depth) :-
+    solve(A, Depth1), solve(B, Depth2),
+    Depth is Depth1 + Depth2.
+solve(A, 0) :-
+    builtin(A),
+    call(A).
+solve(A, Depth) :-
+    clause(A, Body), solve(Body, Depth1),
+    Depth is Depth1 + 1.
+
+solve(Goal, Count) :- prove(Goal, 0, Count).
+prove(true, Count, Count).
+prove((A, B), Count0, Count) :-   
+    prove(A, Count0, Count1),
+    prove(B, Count1, Count).
+prove(A, Count, Count) :-
+    builtin(A), call(A).
+prove(A, Count0, Count) :-
+    clause(A, Body),
+    Count1 is Count0 + 1,
+    prove(Body, Count1, Count).
+
+solve_tree(true, true).
+solve_tree((A, B), (ProofA, ProofB)) :-
+    solve_tree(A, ProofA),
+    solve_tree(B, ProofB).
+solve_tree(A, builtin(A)) :-
+    A \= true,
+    builtin(A),
+    call(A).
+solve_tree(A, (A :- Proof)) :-
+    A \= true,
+    \+ builtin(A),
+    clause(A, Body),
+    solve_tree(Body, Proof).
+
+solve_tree2(true, leaf(true)).
+solve_tree2((A, B), node(and, [PA, PB])) :-
+    solve_tree(A, PA),
+    solve_tree(B, PB).
+solve_tree2(A, node(builtin, A)) :-
+    A \= true,
+    builtin(A),
+    call(A).
+solve_tree2(A, node(A, [P])) :-
+    A \= true,
+    \+ builtin(A),
+    clause(A, Body),
+    solve_tree(Body, P).
+
+solve_list(true, []).
+solve_list((A, B), List) :-
+    solve_list(A, L1),
+    solve_list(B, L2),
+    append(L1, L2, List).
+solve_list(A, [builtin(A)]) :-
+    A \= true,
+    builtin(A),
+    call(A).
+solve_list(A, [rule(A)|Rest]) :-
+    A \= true,
+    \+ builtin(A),
+    clause(A, Body),
+    solve_list(Body, Rest).
+
+parent(john, mary).
+parent(mary, anna).
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+```
