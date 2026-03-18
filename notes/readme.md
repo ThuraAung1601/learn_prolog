@@ -523,4 +523,61 @@ Please see figure 4.4 and 4.5.
 #### Common uses of Cut
 - Confirming the rule choice
 - Cut-fail combination = NOT (\+)
+
 - Terminating a "generate and test" => problem with many solution OR many goals (e.g.)
+
+#### Green cut Red cut
+- A cut which doesn't change the logical meaning of a program is called a green cut.
+- Otherwise it is red cut
+
+```
+% red cut
+% main meal
+homemade(pizza). 
+homemade(soup). 
+homemade(fish).
+
+% dessert
+ripe(apple). 
+ripe(orange). 
+ripe(banana).
+
+% meal has tasty dish and ripe fruit
+meal(Main, Fruit) :- homemade(Main), !, ripe(Fruit).
+```
+- Only pizza - Main = pizza because it has cut in the middle so cannot backtrack for homemade(Main) so cannot search more homemade facts. Just the first one pizza.
+
+```
+% water/2 relates temperature to state
+water(Temp, solid) :- Temp =< 0.
+water(Temp, liquid) :- Temp > 0, Temp < 100.
+water(Temp, gas) :- Temp >= 100.
+
+% h2o/2 uses the cut to be more efficient
+h2o(Temp, solid) :- Temp =< 0, !.
+h2o(Temp, liquid) :- Temp > 0, Temp < 100, !.
+h2o(Temp, gas) :- Temp >= 100. 
+```
+
+### Chapter 5: Negation
+
+```
+negation(G) :- call(G), !, fail.
+negation(_).
+```
+
+- G is a goal and the G (e.g. yellow(X)) is true "call(G)' is succeed and
+- the cut (!) in the middle is to prevent backtrack from fail
+- Prolog code run each goal H :- G1, G2, G3 in that order left to right and once one goal from right is fail it backtrack to the head to find the goal that can satisfy.
+- For example, if G2 is fail, it goes to H and find goal G1 and G2 that satisfy the head H and if succeed continue to G3 ......
+- The cut in the middle means if "G" is true (i.e. call(G) is succeed), it should return fail. Once fail, it tried to backtrack, so we prevent using cut and keep that.
+- negation is the same with built-in \+
+  
+```
+% Sally likes all fruit except yellow
+likes(sally, X) :- fruit(X), negation(yellow(X))
+```
+
+### Chapter 6: Meta-programming
+- Prolog code to run prolog code
+- 
