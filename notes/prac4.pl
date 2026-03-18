@@ -86,12 +86,10 @@ get_even([H|T], Even) :-
 get_even([_H|T], Even) :-
     get_even(T, Even).
 
-delete_all(_, [], []).
-
-delete_all(A, [H|T], X) :-
-    A =:= H,
+delete_all(_, [], []) :- !.
+delete_all(A, [A|T], X) :-
     delete_all(A, T, X), !.
 delete_all(A, [H|T], [H|X]) :-
-    delete_all(A, T, X).
+    delete_all(A, T, X), !.
 
 ispalindrome(L) :- reverse(L, L).

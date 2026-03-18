@@ -1,0 +1,13 @@
+digraph AncestorTree {
+	root [label="ancestor(john,X)"]
+	node0 [label="X = mary" color=green]
+	root -> node0
+	node1 [label="X = david" color=green]
+	root -> node1
+	node2 [label="X = susan" color=red]
+	root -> node2
+	node3 [label="X = tom" color=green]
+	root -> node3
+	node4 [label="X = anna" color=green]
+	root -> node4
+}
